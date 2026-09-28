@@ -1,1 +1,1 @@
-# Coffee-House Landing Page
+# rsschool-landing-page
