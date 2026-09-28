@@ -21,7 +21,9 @@
       })();
     </script>
     <script src="js/theme.js" defer></script>
+    <script src="js/burger.js" defer></script>
     <script src="js/nav.js" defer></script>
+    <script src="js/products.js" defer></script>
     <script src="js/menu.js" defer></script>
   </head>
   <body>
@@ -85,16 +87,73 @@
               width="20"
               height="20">
           </a>
-          <button class="burger" type="button" aria-label="Open menu">
+          <button
+            class="burger"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-nav"
+            data-burger
+          >
             <img
+              class="burger__icon burger__icon--open"
               src="assets/icons/button-icon-burger.svg"
               alt=""
               width="44"
-              height="44">
+              height="44"
+              data-burger-open>
+            <img
+              class="burger__icon burger__icon--close"
+              src="assets/icons/button-icon-burger-close.svg"
+              alt=""
+              width="44"
+              height="44"
+              data-burger-close>
           </button>
         </div>
       </div>
     </header>
+
+    <nav
+      class="mobile-nav"
+      id="mobile-nav"
+      aria-label="Mobile"
+      aria-hidden="true"
+      data-mobile-nav
+    >
+      <ul class="mobile-nav__list">
+        <li>
+          <a class="mobile-nav__link" href="index.html#favorites"
+            >Favorite coffee</a
+          >
+        </li>
+        <li>
+          <a class="mobile-nav__link" href="index.html#about">About</a>
+        </li>
+        <li>
+          <a class="mobile-nav__link" href="index.html#mobile-app"
+            >Mobile app</a
+          >
+        </li>
+        <li>
+          <a class="mobile-nav__link" href="index.html#contacts">Contact us</a>
+        </li>
+        <li>
+          <a
+            class="mobile-nav__link mobile-nav__link--menu mobile-nav__link--current"
+            href="menu.html"
+          >
+            Menu
+            <img
+              class="mobile-nav__menu-icon"
+              src="assets/icons/coffee-cup.svg"
+              alt=""
+              width="40"
+              height="40">
+          </a>
+        </li>
+      </ul>
+    </nav>
 
     <main>
       <section class="menu" id="menu" data-menu aria-labelledby="menu-title">
@@ -116,7 +175,13 @@
               tabindex="0"
               data-category="coffee"
             >
-              <span class="menu__tab-icon" aria-hidden="true">☕</span>
+              <span class="menu__tab-icon" aria-hidden="true">
+                <img
+                  src="assets/images/coffee.png"
+                  alt="Coffee"
+                  width="16"
+                  height="24">
+              </span>
               Coffee
             </button>
             <button
@@ -129,7 +194,13 @@
               tabindex="-1"
               data-category="tea"
             >
-              <span class="menu__tab-icon" aria-hidden="true">🫖</span>
+              <span class="menu__tab-icon" aria-hidden="true">
+                <img
+                  src="assets/images/tea.png"
+                  alt="Tea"
+                  width="16"
+                  height="24">
+              </span>
               Tea
             </button>
             <button
@@ -142,7 +213,13 @@
               tabindex="-1"
               data-category="dessert"
             >
-              <span class="menu__tab-icon" aria-hidden="true">🍰</span>
+              <span class="menu__tab-icon" aria-hidden="true">
+                <img
+                  src="assets/images/dessert.png"
+                  alt="Dessert"
+                  width="16"
+                  height="24">
+              </span>
               Dessert
             </button>
           </div>
@@ -227,16 +304,31 @@
                   target="_blank"
                   rel="noopener noreferrer"
                 >
+                  <img
+                    src="assets/icons/pin-alt.svg"
+                    alt=""
+                    width="20"
+                    height="20">
                   8558 Green Rd., LA
                 </a>
               </li>
               <li>
                 <a class="footer__link" href="tel:+16035550123">
+                  <img
+                    src="assets/icons/phone.svg"
+                    alt=""
+                    width="20"
+                    height="20">
                   +1 (603) 555-0123
                 </a>
               </li>
               <li>
                 <span class="footer__hours">
+                  <img
+                    src="assets/icons/clock.svg"
+                    alt=""
+                    width="20"
+                    height="20">
                   Mon-Sat: 9:00-23:00
                 </span>
               </li>
@@ -245,5 +337,57 @@
         </div>
       </div>
     </footer>
+
+    <div class="modal" hidden data-modal>
+      <div class="modal__backdrop" data-modal-backdrop></div>
+      <div
+        class="modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        data-modal-dialog
+      >
+        <img class="modal__image" alt="" width="310" height="310" data-modal-image>
+        <div class="modal__content">
+          <div class="modal__header">
+            <h2 class="modal__title" id="modal-title" data-modal-title></h2>
+            <p class="modal__description" data-modal-description></p>
+          </div>
+
+          <div class="modal__group">
+            <h3 class="modal__label">Size</h3>
+            <div class="modal__choices" data-modal-sizes></div>
+          </div>
+
+          <div class="modal__group">
+            <h3 class="modal__label">Additives</h3>
+            <div class="modal__choices" data-modal-additives></div>
+          </div>
+
+          <div class="modal__total">
+            <span class="modal__total-label">Total:</span>
+            <span class="modal__total-price" data-modal-price></span>
+          </div>
+
+          <div class="modal__note">
+            <img
+              class="modal__note-icon"
+              src="assets/icons/info.svg"
+              alt=""
+              width="16"
+              height="16">
+            <p class="modal__note-text">
+              The cost is not final. Download our mobile app to see the final
+              price and place your order. Earn loyalty points and enjoy your
+              favorite coffee with up to 20% discount.
+            </p>
+          </div>
+
+          <button class="modal__close" type="button" data-modal-close>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
